@@ -15,7 +15,7 @@ Documentação para o desenvolvimento do teste técnico da empresa DOT
 ### Instalação do Projeto
 1. **Clone o repositório**
    ```bash
-   git clone [url-do-repositorio]
+   git clone https://github.com/Bareaa/dot-t-cnico.git
    cd dot-tecnico
    ```
 
