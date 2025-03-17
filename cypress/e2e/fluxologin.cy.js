@@ -20,4 +20,23 @@ describe('História do Usuário 0.1: Como usuário da plataforma Quero poder rea
         cy.login('standard_user', 'senhaerrada')
         cy.contains('Epic sadface: Username and password do not match any user in this service').should('exist')
     })
+
+    it('CT0.1.4.1 - Validar campos obrigatórios(senha)', () => {
+        cy.get('input[placeholder="Username"]').clear()
+        cy.get('input[placeholder="Password"]').clear()
+        cy.get('input[placeholder="Username"]').type('standard_user')
+
+        cy.get('input[type="submit"]').click()
+        cy.contains('Epic sadface: Password is required').should('exist')
+
+    })
+    it('CT0.1.4.2 - Validar campos obrigatórios(usuário)', () => {
+        cy.get('input[placeholder="Username"]').clear()
+        cy.get('input[placeholder="Password"]').clear()
+        cy.get('input[placeholder="Password"]').type('standard_user')
+
+        cy.get('input[type="submit"]').click()
+        cy.contains('Epic sadface: Username is required').should('exist')
+
+    })
 })

@@ -80,6 +80,10 @@ Para melhorar a experiência, é recomendado configurar o arquivo `cypress.confi
   - **Senha**: `senha_invalida`
   - **Resultado Esperado**: Mensagem de erro de autenticação
 
+- **CT0.1.4**: Campos Obrigatórios
+  - **Ação**: Deixar campos de usuário e senha em branco
+  - **Resultado Esperado**: Mensagem de erro indicando que os campos são obrigatórios
+
 ### Fluxo Catálogo de Produtos:
 
 #### História do Usuário 0.2:
@@ -102,7 +106,15 @@ Para melhorar a experiência, é recomendado configurar o arquivo `cypress.confi
   - **Ação**: Selecionar filtro Preço (baixo para alto)
   - **Resultado Esperado**: Produtos ordenados por preço
 
-- **CT0.2.3**: Validação Detalhes do Produto
+- **CT0.2.3**: Ordenação Z-A
+  - **Ação**: Selecionar filtro Nome (Z-A)
+  - **Resultado Esperado**: Produtos ordenados alfabeticamente
+
+- **CT0.2.4**: Ordenação Preço Decrescente
+  - **Ação**: Selecionar filtro Preço (alto para baixo)
+  - **Resultado Esperado**: Produtos ordenados por preço
+
+- **CT0.2.5**: Validação Detalhes do Produto
   - **Ação**: Selecionar produto específico
   - **Resultado Esperado**:
     - Nome correto
@@ -185,3 +197,80 @@ Aqui está minha estimativa usando Planning Poker, considerando a complexidade d
 **Total estimado**: 29 SPs
 
 O esforço aqui é médio para alto, considerando tanto o desenvolvimento quanto os testes necessários para garantir que tudo funcione sem falhas.
+
+
+# Metodologia de Estimativa - Planning Poker
+
+## Introdução
+
+Para realizar a estimativa dos fluxos de testes da aplicação [SauceDemo](https://www.saucedemo.com/), utilizei a técnica de Planning Poker, uma metodologia ágil de estimativa baseada em consenso. Esta técnica é amplamente utilizada por equipes de desenvolvimento para avaliar o esforço necessário para implementar funcionalidades ou, no caso específico deste projeto, para automatizar testes.
+
+## Fundamentos Utilizados
+
+### Sequência de Fibonacci
+
+Utilizei a sequência de Fibonacci (1, 2, 3, 5, 8, 13, 21...) como base para as estimativas, uma prática comum em Planning Poker. Esta sequência é ideal pois:
+
+1. Reflete a incerteza crescente à medida que as tarefas se tornam maiores
+2. Força decisões mais claras entre valores (não há meio termo entre 5 e 8, por exemplo)
+3. Evita a falsa precisão de usar números sequenciais (como 6, 7, 8)
+
+### Fatores de Avaliação
+
+Para cada fluxo, considerei os seguintes fatores para determinar a pontuação:
+
+1. **Complexidade técnica**: Quantidade de interações com elementos da interface, validações necessárias, e cenários de teste
+2. **Quantidade de casos de teste**: Número de cenários a serem automatizados
+3. **Dependências**: Relação com outros fluxos e necessidade de pré-condições
+4. **Riscos**: Possíveis instabilidades ou comportamentos assíncronos na aplicação
+
+## Critérios de Estimativa
+
+| Pontuação | Complexidade | Tempo Estimado | Exemplos de Tarefas |
+|-----------|--------------|----------------|---------------------|
+| 1-2 | Muito baixa | Menos de 1 hora | Validações simples, casos de teste unitários |
+| 3 | Baixa | 1-2 horas | Fluxos simples com poucas interações |
+| 5 | Média | 2-4 horas | Fluxos com múltiplas interações e validações |
+| 8 | Alta | 4-8 horas | Fluxos complexos com muitas validações e estados |
+| 13+ | Muito alta | 8+ horas | Fluxos com grande quantidade de variações e dependências |
+
+## Justificativa das Estimativas
+
+### Login (5 pontos)
+- **Justificativa**: Apesar de ser um fluxo relativamente simples, envolve múltiplos cenários (usuário padrão, bloqueado, credenciais inválidas) e validações de mensagens de erro.
+- **Complexidade**: Média
+- **Cenários**: 3 casos de teste com diferentes validações
+
+### Catálogo de Produtos (8 pontos)
+- **Justificativa**: Fluxo com maior complexidade devido à necessidade de validar ordenações (A-Z, Z-A, preço) e confirmar detalhes de produtos. Requer validações mais elaboradas para garantir a ordenação correta.
+- **Complexidade**: Alta
+- **Cenários**: 3 casos de teste, mas com maior complexidade de validação
+
+### Carrinho de Compras (5 pontos)
+- **Justificativa**: Envolve interações com múltiplos produtos (adicionar/remover) e validações de estado do carrinho. Complexidade média por exigir manipulação de vários elementos.
+- **Complexidade**: Média
+- **Cenários**: 2 casos de teste com várias interações
+
+### Compra (Checkout) (8 pontos)
+- **Justificativa**: Fluxo mais longo e complexo com múltiplas etapas (informações pessoais, revisão, confirmação). Requer validações de campos obrigatórios e cálculos de valores.
+- **Complexidade**: Alta
+- **Cenários**: 3 casos de teste com fluxo completo e validações detalhadas
+
+### Configuração da Massa de Dados (3 pontos)
+- **Justificativa**: Trabalho necessário para preparar os dados e ambientes de teste. Complexidade baixa, mas necessário para suportar os outros fluxos.
+- **Complexidade**: Baixa
+- **Cenários**: Preparação de ambiente
+
+## Considerações sobre a Estimativa Total
+
+O total de 29 story points representa um esforço médio-alto para a implementação completa da automação de testes. Este valor reflete:
+
+1. A cobertura completa dos fluxos principais da aplicação
+2. A necessidade de criar uma estrutura robusta de testes
+3. A implementação de mecanismos de validação para todos os cenários
+
+A estimativa considera a execução individual de cada fluxo, mas também leva em conta a integração entre eles para formar um teste end-to-end completo.
+
+## Conclusão
+
+A metodologia de Planning Poker permitiu uma estimativa estruturada e baseada em critérios objetivos, fornecendo uma visão clara do esforço necessário para implementar a automação de testes para a aplicação SauceDemo.
